@@ -35,7 +35,7 @@ export default function Dashboard() {
               <CartesianGrid strokeDasharray="3 3" vertical={false} />
               <XAxis dataKey="month" tick={{ fontSize: 12 }} />
               <YAxis tick={{ fontSize: 12 }} />
-              <Tooltip formatter={(v: number) => [`${v} млн`, "Sell-in"]} />
+              <Tooltip formatter={(v) => [`${v} млн`, "Sell-in"]} />
               <Bar dataKey="total_mln" fill="#3b82f6" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
