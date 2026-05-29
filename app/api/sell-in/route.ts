@@ -3,13 +3,13 @@ import { NextResponse } from "next/server"
 
 export async function GET() {
   try {
-    const password = Buffer.from(process.env.CLICKHOUSE_PASSWORD_B64 || "", "base64").toString("utf8")
+    const password = Buffer.from((process.env.CLICKHOUSE_PASSWORD_B64 || "").trim(), "base64").toString("utf8")
 
     const client = createClient({
-      host: `https://${process.env.CLICKHOUSE_HOST}:${process.env.CLICKHOUSE_PORT}`,
-      username: process.env.CLICKHOUSE_USER,
+      host: `https://${(process.env.CLICKHOUSE_HOST || "").trim()}:${(process.env.CLICKHOUSE_PORT || "").trim()}`,
+      username: (process.env.CLICKHOUSE_USER || "").trim(),
       password,
-      tls: { ca_cert: Buffer.from(process.env.CLICKHOUSE_CA_CERT_BASE64 || "", "base64") },
+      tls: { ca_cert: Buffer.from((process.env.CLICKHOUSE_CA_CERT_BASE64 || "").trim(), "base64") },
     })
 
     const result = await client.query({
